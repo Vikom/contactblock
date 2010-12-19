@@ -1,0 +1,46 @@
+<?php
+// $Id:
+
+/**
+ * @file
+ * Site-wide contact form in block.
+ * @author Vikom (drupal.org/user/279158)
+ */
+
+/**
+ * Implements hook_block_info().
+ */
+function contactblock_block_info() {
+  $blocks['contactblock'] = array(
+    'info' => t('Contact block'), 
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function contactblock_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'contactblock':
+      return array(
+        'subject' => t('Contact'),
+        'content' => contactblock_get_contact_form(),
+      );
+      break;
+
+  }
+  return $block;
+}
+
+function contactblock_get_contact_form() {
+  form_load_include($form_state, 'inc', 'contact', 'contact.pages');
+  $form = drupal_get_form('contact_site_form');
+  $output = drupal_render($form);
+
+  return $output;
+}

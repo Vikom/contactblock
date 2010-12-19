@@ -1,0 +1,8 @@
+; $Id:
+name = Contact block
+description = A simple module that put the sitewide contact form in a block.
+core = 7.x
+package = Other
+dependencies[] = "contact"
+
+
